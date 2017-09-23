@@ -102,7 +102,7 @@ def get_accuracy(session, model, provider, batch_size, partition_name):
 
 
 def train(provider, hyperparams, save_model_name, resume_checkpoint, checkpoint=None):
-    model_path, _ = setup_model_path(save_model_name)
+    model_path, model_dir = setup_model_path(save_model_name)
     maxlen_source, _ = provider.seq_sizes()
     train_size = provider.dataset_size(TRAIN)
     epoch_size = train_size // hyperparams.batch_size
@@ -117,8 +117,10 @@ def train(provider, hyperparams, save_model_name, resume_checkpoint, checkpoint=
         with tf.Session() as session:
             if resume_checkpoint:
                 if checkpoint:
+                    print("Restoring from checkpoint", str(checkpoint))
                     saver.restore(session, model_path + '-' + str(checkpoint))
                 else:
+                    print("Restoring from checkpoint", tf.train.latest_checkpoint(model_dir))
                     saver.restore(session, tf.train.latest_checkpoint(model_dir))
             else:
                 session.run(tf.global_variables_initializer())
