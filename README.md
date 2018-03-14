@@ -1,5 +1,5 @@
 # Neuramanteau
-Accompanying code for the paper -  Neuramanteau: A Neural Network Ensemble Model for Lexical Blends.
+Accompanying code for the paper -  [Neuramanteau: A Neural Network Ensemble Model for Lexical Blends](http://aclweb.org/anthology/I17-1058).
 
 Try out the demo [here](https://neuroblender.herokuapp.com)
 
